@@ -1,203 +1,88 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>AAT Smart ERP</title>
-<meta name="theme-color" content="#0f172a" />
-<link rel="manifest" href="manifest.json" />
-<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<style>
-:root{--bg:#0b1220;--panel:#111a2d;--soft:#16233a;--line:#263857;--text:#eaf1ff;--muted:#9fb0cf;--accent:#38bdf8;--ok:#4ade80;--warn:#fbbf24;--danger:#f87171}
-*{box-sizing:border-box}body{margin:0;background:linear-gradient(180deg,#09101d,#0b1220);color:var(--text);font-family:Tahoma,Arial,sans-serif}button,input,select,textarea{font:inherit}
-.hidden{display:none!important}.app{display:grid;grid-template-columns:260px 1fr;min-height:100vh}.sidebar{background:#0f172a;border-left:1px solid var(--line);padding:16px;position:sticky;top:0;height:100vh;overflow:auto}.brand{font-size:22px;font-weight:700}.sub{color:var(--muted);font-size:12px;margin:6px 0 14px}
-.nav button{width:100%;text-align:right;background:transparent;color:var(--text);border:1px solid transparent;padding:11px 12px;border-radius:12px;margin-bottom:6px;cursor:pointer}.nav button.active,.nav button:hover{background:#13203c;border-color:#234064}
-.content{padding:18px}.top{display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin-bottom:14px}.title{font-size:26px;font-weight:700}.meta{color:var(--muted);font-size:13px}
-.card{background:rgba(17,26,45,.95);border:1px solid var(--line);border-radius:16px;padding:14px;box-shadow:0 8px 24px rgba(0,0,0,.18)}
-.grid{display:grid;gap:12px}.g2{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-label{display:block;font-size:12px;color:var(--muted);margin-bottom:5px}input,select,textarea{width:100%;background:#0b1326;color:var(--text);border:1px solid #28405f;padding:10px 11px;border-radius:12px}textarea{min-height:88px}
-.btns{display:flex;gap:8px;flex-wrap:wrap}.btn{border:none;border-radius:12px;padding:10px 14px;font-weight:700;cursor:pointer}.primary{background:var(--ok);color:#04160a}.secondary{background:var(--accent);color:#04111b}.ghost{background:#16233e;color:var(--text);border:1px solid #2d4769}.danger{background:var(--danger);color:#230404}
-.kpi{background:#0d1930;border:1px solid var(--line);border-radius:16px;padding:14px}.kpi .n{font-size:28px;font-weight:700}.kpi .l{color:var(--muted);font-size:13px}
-table{width:100%;border-collapse:collapse;font-size:13px}th,td{padding:9px;border-bottom:1px solid #223352;text-align:right}th{position:sticky;top:0;background:#0b1326}.table{max-height:420px;overflow:auto;border:1px solid #223352;border-radius:14px;margin-top:8px}.section{display:none}.section.active{display:block}
-.badge{display:inline-block;padding:4px 8px;border-radius:999px;font-size:12px;font-weight:700}.ok{background:rgba(74,222,128,.12);color:#86efac}.warn{background:rgba(251,191,36,.12);color:#fcd34d}.dangerbg{background:rgba(248,113,113,.12);color:#fca5a5}.info{background:rgba(56,189,248,.12);color:#7dd3fc}
-.login{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:18px}.login .card{width:min(420px,100%)}
-.small{font-size:12px;color:var(--muted)} .pill{padding:5px 10px;border-radius:999px;background:#13203c;border:1px solid #28405f}
-@media (max-width:1000px){.g4,.row{grid-template-columns:repeat(2,1fr)}}@media (max-width:760px){.app{grid-template-columns:1fr}.sidebar{height:auto;position:relative}.g4,.g3,.g2,.row{grid-template-columns:1fr}.content{padding:12px}}
-</style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AAT ERP v9 PRO</title>
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-<div id="loginView" class="login">
-  <div class="card">
-    <div class="brand">AAT Smart ERP</div>
-    <div class="sub">شركة عمار العاني — النسخة الذكية المحلية</div>
-    <div class="grid">
-      <div><label>اسم المستخدم</label><input id="loginUser" placeholder="admin"></div>
-      <div><label>الرقم السري</label><input id="loginPass" type="password" placeholder="123456"></div>
-      <div class="btns"><button class="btn primary" onclick="login()">دخول</button></div>
-      <div class="small">admin / 123456 — stock / 123456 — ammar / 123456 — abuammar / 123456 — account / 123456</div>
+  <div id="app">
+    <div id="loginScreen" class="login-shell">
+      <div class="login-card">
+        <div class="brand-row">
+          <div class="brand-badge">AAT</div>
+          <div>
+            <h1>نظام شركة عمار العاني</h1>
+            <p>v9 PRO — نسخة احترافية مفتوحة</p>
+          </div>
+        </div>
+        <div class="login-grid">
+          <label>اسم المستخدم</label>
+          <input id="loginUsername" type="text" placeholder="admin" />
+          <label>الرقم السري</label>
+          <input id="loginPassword" type="password" placeholder="123456" />
+        </div>
+        <button class="primary-btn full" id="loginBtn">دخول</button>
+        <div class="hint-box">
+          <strong>الحساب الافتراضي:</strong> admin / 123456
+        </div>
+      </div>
+    </div>
+
+    <div id="mainApp" class="hidden">
+      <aside class="sidebar">
+        <div class="sidebar-top">
+          <div class="brand-badge">AAT</div>
+          <div>
+            <h2>عمار العاني</h2>
+            <small id="currentUserLabel"></small>
+          </div>
+        </div>
+
+        <div class="search-box">
+          <input id="globalSearch" type="text" placeholder="ابحث عن صنف، فاتورة، عميل، مورد..." />
+          <div id="globalSuggestions" class="suggestions hidden"></div>
+        </div>
+
+        <nav id="sidebarNav" class="menu"></nav>
+
+        <div class="sidebar-bottom">
+          <button class="ghost-btn full" id="logoutBtn">تسجيل خروج</button>
+        </div>
+      </aside>
+
+      <main class="content">
+        <header class="topbar">
+          <div>
+            <h1 id="pageTitle">لوحة التحكم</h1>
+            <p id="pageSubtitle">نظرة تنفيذية سريعة على الشركة</p>
+          </div>
+          <div class="topbar-actions">
+            <button class="outline-btn" id="backupBtn">نسخة احتياطية</button>
+            <button class="outline-btn" id="restoreBtn">استيراد نسخة</button>
+            <input type="file" id="restoreFile" class="hidden" accept="application/json" />
+          </div>
+        </header>
+
+        <section id="dashboardSection" class="page-section"></section>
+        <section id="salesSection" class="page-section hidden"></section>
+        <section id="purchasesSection" class="page-section hidden"></section>
+        <section id="itemsSection" class="page-section hidden"></section>
+        <section id="inventorySection" class="page-section hidden"></section>
+        <section id="customersSection" class="page-section hidden"></section>
+        <section id="suppliersSection" class="page-section hidden"></section>
+        <section id="debtsSection" class="page-section hidden"></section>
+        <section id="transfersSection" class="page-section hidden"></section>
+        <section id="reportsSection" class="page-section hidden"></section>
+        <section id="suggestionsSection" class="page-section hidden"></section>
+        <section id="settingsSection" class="page-section hidden"></section>
+        <section id="usersSection" class="page-section hidden"></section>
+      </main>
     </div>
   </div>
-</div>
-<div id="appView" class="app hidden">
-  <aside class="sidebar">
-    <div class="brand">AAT Smart ERP</div>
-    <div class="sub">المخزن + المبيعات + المشتريات + التحليل</div>
-    <div id="who" class="small"></div>
-    <div class="nav" id="nav" style="margin-top:12px"></div>
-    <div class="btns" style="margin-top:14px">
-      <button class="btn ghost" onclick="exportExcel()">تصدير Excel</button>
-      <button class="btn danger" onclick="logout()">خروج</button>
-    </div>
-  </aside>
-  <main class="content">
-    <div class="top">
-      <div><div id="pageTitle" class="title">لوحة التحكم</div><div class="meta">المواقع: المخزن — فرع عمار العاني — فرع أبو عمار</div></div>
-      <div class="pill" id="today"></div>
-    </div>
 
-    <section id="dashboard" class="section active">
-      <div class="grid g4" id="kpis"></div>
-      <div class="grid g2" style="margin-top:12px">
-        <div class="card"><h3>نقص متوقع خلال أسبوعين</h3><div id="shortages"></div></div>
-        <div class="card"><h3>تصنيف الاستهلاك 14 يوم</h3><div id="bands"></div></div>
-      </div>
-    </section>
-
-    <section id="items" class="section">
-      <div class="grid g2">
-        <div class="card">
-          <h3>إدخال مادة جديدة</h3>
-          <div class="row">
-            <div><label>اسم الصنف</label><input id="it_name"></div>
-            <div><label>الكود الداخلي</label><input id="it_code"></div>
-            <div><label>الباركود</label><input id="it_barcode"></div>
-            <div><label>القسم الرئيسي</label><select id="it_category"><option>كهربائيات</option><option>عدد يدوية</option><option>صحيات</option><option>مواد ماء ومجاري</option><option>براغي</option></select></div>
-            <div><label>المجموعة</label><input id="it_group"></div>
-            <div><label>الوحدة</label><input id="it_unit" value="قطعة"></div>
-            <div><label>سعر الكلفة</label><input id="it_cost" type="number" step="0.01"></div>
-            <div><label>سعر البيع</label><input id="it_price" type="number" step="0.01"></div>
-            <div><label>الحد الأدنى</label><input id="it_min" type="number" value="0"></div>
-            <div><label>حد إعادة الطلب</label><input id="it_reorder" type="number" value="0"></div>
-            <div><label>حد صرف 14 يوم</label><input id="it_cons14" type="number" value="0"></div>
-            <div><label>الموقع</label><select id="it_branch"><option>المخزن</option><option>فرع عمار العاني</option><option>فرع أبو عمار</option></select></div>
-          </div>
-          <div class="btns" style="margin-top:10px"><button class="btn primary" onclick="saveItem()">حفظ المادة</button><button class="btn ghost" onclick="clearItemForm()">تفريغ</button></div>
-        </div>
-        <div class="card">
-          <h3>استيراد المواد من Excel — ذكي</h3>
-          <div class="small">المستورد الذكي يفهم أعمدة مثل: اسم المنتج / اسم الصنف — الكلفة / سعر الكلفة — البيع / سعر البيع — الرمز / الباركود / الكود الداخلي</div>
-          <div style="margin-top:10px"><input type="file" id="itemsFile" accept=".xlsx,.xls,.csv"></div>
-          <div class="btns" style="margin-top:10px"><button class="btn secondary" onclick="importItemsSmart()">استيراد المواد</button><button class="btn ghost" onclick="downloadItemsTemplate()">تحميل نموذج</button></div>
-          <div id="itemsImportMsg" class="small" style="margin-top:10px"></div>
-        </div>
-      </div>
-      <div class="card" style="margin-top:12px">
-        <div class="row">
-          <div><label>بحث</label><input id="itemsSearch" oninput="renderItems()" placeholder="اسم / كود / باركود"></div>
-          <div><label>القسم</label><select id="itemsFilterCat" onchange="renderItems()"><option value="">الكل</option><option>كهربائيات</option><option>عدد يدوية</option><option>صحيات</option><option>مواد ماء ومجاري</option><option>براغي</option></select></div>
-          <div><label>الصفحة</label><select id="itemsPageSize" onchange="renderItems()"><option>50</option><option>100</option><option>200</option></select></div>
-        </div>
-        <div class="table"><table id="itemsTable"></table></div>
-        <div id="itemsFoot" class="small" style="margin-top:8px"></div>
-      </div>
-    </section>
-
-    <section id="sales" class="section">
-      <div class="grid g2">
-        <div class="card">
-          <h3>نظام البيع</h3>
-          <div class="row">
-            <div><label>الموقع</label><select id="sale_branch"><option>المخزن</option><option>فرع عمار العاني</option><option>فرع أبو عمار</option></select></div>
-            <div><label>التاريخ</label><input id="sale_date" type="date"></div>
-            <div><label>العميل</label><input id="sale_customer"></div>
-            <div><label>الصنف (اسم / كود / باركود)</label><input id="sale_key"></div>
-            <div><label>الكمية</label><input id="sale_qty" type="number"></div>
-            <div><label>السعر</label><input id="sale_price" type="number" step="0.01"></div>
-            <div style="display:flex;align-items:end"><button class="btn secondary" onclick="addSaleLine()">إضافة للسلة</button></div>
-          </div>
-          <div class="table"><table id="saleTable"></table></div>
-          <div class="btns" style="margin-top:10px"><button class="btn primary" onclick="saveSale()">حفظ فاتورة بيع</button><button class="btn ghost" onclick="clearSale()">تفريغ</button></div>
-        </div>
-        <div class="card">
-          <h3>استيراد فواتير بيع / شراء من Excel — ذكي</h3>
-          <div class="small">يفهم أعمدة مثل: نوع العملية / شراء / بيع — التاريخ — الكود الداخلي — الباركود — اسم الصنف — الكمية — السعر — الموقع</div>
-          <div style="margin-top:10px"><input type="file" id="invFile" accept=".xlsx,.xls,.csv"></div>
-          <div class="btns" style="margin-top:10px"><button class="btn secondary" onclick="importInvoicesSmart()">استيراد الفواتير</button><button class="btn ghost" onclick="downloadInvoicesTemplate()">تحميل نموذج الفواتير</button></div>
-          <div id="invImportMsg" class="small" style="margin-top:10px"></div>
-        </div>
-      </div>
-    </section>
-
-    <section id="purchases" class="section">
-      <div class="card">
-        <h3>نظام الشراء</h3>
-        <div class="row">
-          <div><label>الموقع</label><select id="buy_branch"><option>المخزن</option><option>فرع عمار العاني</option><option>فرع أبو عمار</option></select></div>
-          <div><label>التاريخ</label><input id="buy_date" type="date"></div>
-          <div><label>المورد</label><input id="buy_supplier"></div>
-          <div><label>الصنف (اسم / كود / باركود)</label><input id="buy_key"></div>
-          <div><label>الكمية</label><input id="buy_qty" type="number"></div>
-          <div><label>السعر</label><input id="buy_price" type="number" step="0.01"></div>
-          <div style="display:flex;align-items:end"><button class="btn secondary" onclick="addBuyLine()">إضافة للسلة</button></div>
-        </div>
-        <div class="table"><table id="buyTable"></table></div>
-        <div class="btns" style="margin-top:10px"><button class="btn primary" onclick="savePurchase()">حفظ فاتورة شراء</button><button class="btn ghost" onclick="clearBuy()">تفريغ</button></div>
-      </div>
-    </section>
-
-    <section id="reports" class="section">
-      <div class="grid g2">
-        <div class="card"><h3>تقارير سريعة</h3><div id="reportSummary"></div></div>
-        <div class="card"><h3>آخر الحركات</h3><div class="table"><table id="movementsTable"></table></div></div>
-      </div>
-    </section>
-  </main>
-</div>
-<script>
-const USERS=[{u:'admin',p:'123456',r:'مدير أعلى'},{u:'stock',p:'123456',r:'مخزن'},{u:'ammar',p:'123456',r:'فرع عمار العاني'},{u:'abuammar',p:'123456',r:'فرع أبو عمار'},{u:'account',p:'123456',r:'محاسب'}];
-const SECTIONS=[['dashboard','لوحة التحكم'],['items','الأصناف والإدخال'],['sales','نظام البيع'],['purchases','نظام الشراء'],['reports','التقارير']];
-const BRANCHES=['المخزن','فرع عمار العاني','فرع أبو عمار'];
-let db = JSON.parse(localStorage.getItem('aat_smart_db')||'null') || {items:[], sales:[], purchases:[], movements:[]};
-let currentUser=null, saleCart=[], buyCart=[];
-function saveDB(){localStorage.setItem('aat_smart_db', JSON.stringify(db));}
-function login(){const u=loginUser.value.trim(),p=loginPass.value.trim(); const user=USERS.find(x=>x.u===u&&x.p===p); if(!user){alert('بيانات الدخول غير صحيحة'); return;} currentUser=user; loginView.classList.add('hidden'); appView.classList.remove('hidden'); who.textContent=`${user.r} — ${user.u}`; initNav(); today.textContent=new Date().toLocaleDateString('ar'); sale_date.valueAsDate=new Date(); buy_date.valueAsDate=new Date(); renderAll();}
-function logout(){currentUser=null; appView.classList.add('hidden'); loginView.classList.remove('hidden');}
-function initNav(){nav.innerHTML=''; SECTIONS.forEach(([id,name],i)=>{const b=document.createElement('button'); b.textContent=name; b.className=i===0?'active':''; b.onclick=()=>showSection(id,name,b); nav.appendChild(b);});}
-function showSection(id,name,btn){document.querySelectorAll('.section').forEach(s=>s.classList.remove('active')); document.getElementById(id).classList.add('active'); pageTitle.textContent=name; document.querySelectorAll('.nav button').forEach(b=>b.classList.remove('active')); if(btn) btn.classList.add('active'); renderAll();}
-function normalize(s){return String(s||'').trim().toLowerCase();}
-function smartVal(obj, keys){ const entries=Object.entries(obj); for(const [k,v] of entries){ const nk=normalize(k); if(keys.some(a=>nk===a||nk.includes(a))) return v; } return ''; }
-function inferCategory(name, group=''){ const t=(name+' '+group).toLowerCase(); if(/برغي|صامول|مسمار|وشرة|رول بلاك/.test(t)) return 'براغي'; if(/حنفي|مغسل|خلاط|سيفون|صحي/.test(t)) return 'صحيات'; if(/أنبوب|مجاري|ماء|pvc|كوع|تي|جلب|مصب/.test(t)) return 'مواد ماء ومجاري'; if(/مفك|بنسة|زرادية|شاكوش|كماشة|عدة|منشار|متر/.test(t)) return 'عدد يدوية'; return 'كهربائيات'; }
-function findItem(key){ const k=normalize(key); return db.items.find(i=>normalize(i.code)===k||normalize(i.barcode)===k||normalize(i.name)===k||normalize(i.name).includes(k)); }
-function stockOf(code, branch){ let q=0; db.movements.forEach(m=>{ if(m.code!==code) return; if(m.type==='شراء' && m.to===branch) q+=m.qty; if(m.type==='بيع' && m.from===branch) q-=m.qty; if(m.type==='إرجاع بيع' && m.to===branch) q+=m.qty; if(m.type==='إرجاع شراء' && m.from===branch) q-=m.qty; }); return q; }
-function totalStock(code){ return BRANCHES.reduce((a,b)=>a+stockOf(code,b),0); }
-function saveItem(){ const item={name:it_name.value.trim(), code:it_code.value.trim()||('C'+Date.now()), barcode:it_barcode.value.trim(), category:it_category.value, group:it_group.value.trim(), unit:it_unit.value.trim()||'قطعة', cost:+it_cost.value||0, price:+it_price.value||0, min:+it_min.value||0, reorder:+it_reorder.value||0, cons14:+it_cons14.value||0, branch:it_branch.value}; if(!item.name){alert('اكتب اسم الصنف');return;} const ex=db.items.find(x=>x.code===item.code|| (item.barcode && x.barcode===item.barcode)); if(ex){Object.assign(ex,item);} else db.items.push(item); saveDB(); clearItemForm(); renderAll();}
-function clearItemForm(){['it_name','it_code','it_barcode','it_group','it_unit','it_cost','it_price','it_min','it_reorder','it_cons14'].forEach(id=>window[id].value=''); it_unit.value='قطعة'; it_category.value='كهربائيات'; it_branch.value='المخزن';}
-function renderItems(){ const q=normalize(itemsSearch.value); const cat=itemsFilterCat.value; const pageSize=+itemsPageSize.value||50; let arr=db.items.filter(i=>(!q || [i.name,i.code,i.barcode].some(v=>normalize(v).includes(q))) && (!cat || i.category===cat)); const total=arr.length; arr=arr.slice(0,pageSize); let html='<tr><th>الصنف</th><th>الكود</th><th>القسم</th><th>السعر</th><th>مخزون إجمالي</th><th>الحالة</th></tr>'; arr.forEach(i=>{ const st=totalStock(i.code); const status=st<=i.min?'<span class="badge dangerbg">حرج</span>':(st<=i.reorder?'<span class="badge warn">يحتاج طلب</span>':'<span class="badge ok">طبيعي</span>'); html+=`<tr><td>${i.name}</td><td>${i.code}</td><td>${i.category}</td><td>${i.price}</td><td>${st}</td><td>${status}</td></tr>`;}); itemsTable.innerHTML=html; itemsFoot.textContent=`عرض ${arr.length} من أصل ${total} مادة`; }
-function addSaleLine(){ const it=findItem(sale_key.value); if(!it){alert('الصنف غير موجود');return;} saleCart.push({code:it.code,name:it.name,qty:+sale_qty.value||0,price:+sale_price.value||it.price,branch:sale_branch.value,date:sale_date.value||new Date().toISOString().slice(0,10)}); renderSaleCart(); }
-function renderSaleCart(){ let h='<tr><th>الصنف</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr>'; saleCart.forEach(x=>h+=`<tr><td>${x.name}</td><td>${x.qty}</td><td>${x.price}</td><td>${(x.qty*x.price).toFixed(2)}</td></tr>`); saleTable.innerHTML=h; }
-function saveSale(){ if(!saleCart.length){alert('السلة فارغة');return;} saleCart.forEach(x=>{ db.sales.push({...x, customer:sale_customer.value.trim()}); db.movements.push({type:'بيع', code:x.code, name:x.name, qty:x.qty, from:x.branch, to:'', date:x.date, price:x.price}); }); saveDB(); clearSale(); renderAll(); alert('تم حفظ فاتورة البيع'); }
-function clearSale(){ saleCart=[]; sale_customer.value=''; sale_key.value=''; sale_qty.value=''; sale_price.value=''; renderSaleCart(); }
-function addBuyLine(){ const it=findItem(buy_key.value); if(!it){alert('الصنف غير موجود');return;} buyCart.push({code:it.code,name:it.name,qty:+buy_qty.value||0,price:+buy_price.value||it.cost,branch:buy_branch.value,date:buy_date.value||new Date().toISOString().slice(0,10)}); renderBuyCart(); }
-function renderBuyCart(){ let h='<tr><th>الصنف</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th></tr>'; buyCart.forEach(x=>h+=`<tr><td>${x.name}</td><td>${x.qty}</td><td>${x.price}</td><td>${(x.qty*x.price).toFixed(2)}</td></tr>`); buyTable.innerHTML=h; }
-function savePurchase(){ if(!buyCart.length){alert('السلة فارغة');return;} buyCart.forEach(x=>{ db.purchases.push({...x, supplier:buy_supplier.value.trim()}); db.movements.push({type:'شراء', code:x.code, name:x.name, qty:x.qty, from:'', to:x.branch, date:x.date, price:x.price}); const it=db.items.find(i=>i.code===x.code); if(it) it.cost=x.price; }); saveDB(); clearBuy(); renderAll(); alert('تم حفظ فاتورة الشراء'); }
-function clearBuy(){ buyCart=[]; buy_supplier.value=''; buy_key.value=''; buy_qty.value=''; buy_price.value=''; renderBuyCart(); }
-function consumptionLast14(code){ const now=new Date(); const from=new Date(now.getTime()-14*24*60*60*1000); return db.movements.filter(m=>m.code===code && m.type==='بيع' && new Date(m.date)>=from).reduce((a,b)=>a+b.qty,0); }
-function renderDashboard(){ const itemsCount=db.items.length; const salesCount=db.sales.length; const purchasesCount=db.purchases.length; const critical=db.items.filter(i=>totalStock(i.code)<=i.min).length; kpis.innerHTML=`<div class='kpi'><div class='l'>عدد الأصناف</div><div class='n'>${itemsCount}</div></div><div class='kpi'><div class='l'>فواتير البيع</div><div class='n'>${salesCount}</div></div><div class='kpi'><div class='l'>فواتير الشراء</div><div class='n'>${purchasesCount}</div></div><div class='kpi'><div class='l'>مواد حرجة</div><div class='n'>${critical}</div></div>`;
-  const sh=db.items.map(i=>{ const stock=totalStock(i.code); const cons=Math.max(consumptionLast14(i.code), +i.cons14||0); const shortage = stock < cons; return {name:i.name,stock,cons}; }).filter(x=>x.cons>0 && x.stock < x.cons).slice(0,20);
-  shortages.innerHTML = sh.length? sh.map(x=>`<div style='padding:8px 0;border-bottom:1px solid #223352'>${x.name} — المتوفر ${x.stock} / المتوقع 14 يوم ${x.cons}</div>`).join('') : '<span class="badge ok">لا يوجد نقص متوقع حالياً</span>';
-  let b0=0,b1=0,b2=0,b3=0; db.items.forEach(i=>{ const c=consumptionLast14(i.code); if(c<=10) b0++; else if(c<=20) b1++; else if(c<=40) b2++; else b3++; });
-  bands.innerHTML = `<div class='small'>0 - 10 : ${b0}</div><div class='small'>10 - 20 : ${b1}</div><div class='small'>20 - 40 : ${b2}</div><div class='small'>40+ : ${b3}</div>`;
-}
-function renderReports(){ const totalSales=db.sales.reduce((a,b)=>a+b.qty*b.price,0); const totalBuy=db.purchases.reduce((a,b)=>a+b.qty*b.price,0); reportSummary.innerHTML=`<div class='small'>إجمالي قيمة المبيعات: ${totalSales.toFixed(2)}</div><div class='small'>إجمالي قيمة المشتريات: ${totalBuy.toFixed(2)}</div><div class='small'>عدد الحركات: ${db.movements.length}</div>`; let h='<tr><th>النوع</th><th>الصنف</th><th>الكمية</th><th>من</th><th>إلى</th><th>التاريخ</th></tr>'; db.movements.slice(-50).reverse().forEach(m=>h+=`<tr><td>${m.type}</td><td>${m.name}</td><td>${m.qty}</td><td>${m.from||'-'}</td><td>${m.to||'-'}</td><td>${m.date}</td></tr>`); movementsTable.innerHTML=h; }
-function renderAll(){ renderDashboard(); renderItems(); renderReports(); renderSaleCart(); renderBuyCart(); }
-function fileToRows(file){ return new Promise((resolve,reject)=>{ const reader=new FileReader(); reader.onload=e=>{ try{ const data=e.target.result; let rows=[]; if(file.name.toLowerCase().endsWith('.csv')){ const text=new TextDecoder('utf-8').decode(new Uint8Array(data)); const wb=XLSX.read(text,{type:'string'}); rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''}); } else { const wb=XLSX.read(data,{type:'array'}); rows=XLSX.utils.sheet_to_json(wb.Sheets[wb.SheetNames[0]],{defval:''}); } resolve(rows);} catch(err){reject(err);} }; reader.readAsArrayBuffer(file); }); }
-async function importItemsSmart(){ const f=itemsFile.files[0]; if(!f){alert('اختر ملف'); return;} const rows=await fileToRows(f); let added=0, updated=0, skipped=0; rows.forEach(r=>{ const name=smartVal(r,['اسم الصنف','اسم المنتج','name']); const code=String(smartVal(r,['الكود الداخلي','الرمز / الباركود','code','sku'])||'').trim(); const barcode=String(smartVal(r,['الباركود','barcode','باركود'])||'').trim(); if(!name && !code && !barcode){ skipped++; return; } const group=smartVal(r,['المجموعة','group']); const item={ name: String(name||'').trim(), code: code || ('AUTO-'+Date.now()+'-'+Math.random().toString(36).slice(2,6)), barcode, category: smartVal(r,['القسم الرئيسي','القسم','category']) || inferCategory(String(name||''), String(group||'')), group: String(group||'').trim(), unit: smartVal(r,['الوحدة','unit']) || 'قطعة', cost: +smartVal(r,['سعر الكلفة','الكلفة','cost'])||0, price: +smartVal(r,['سعر البيع','البيع','price'])||0, min: +smartVal(r,['الحد الأدنى','min'])||0, reorder: +smartVal(r,['حد إعادة الطلب','reorder'])||0, cons14: +smartVal(r,['حد أدنى للصرف لكل 15 يوم','حد صرف 14 يوم','cons14'])||0, branch: smartVal(r,['الموقع','branch']) || 'المخزن' };
- const ex=db.items.find(x=> (code && x.code===code) || (barcode && x.barcode===barcode) || normalize(x.name)===normalize(item.name)); if(ex){ Object.assign(ex,item); updated++; } else { db.items.push(item); added++; } }); saveDB(); renderAll(); itemsImportMsg.textContent=`تم الاستيراد: إضافة ${added} | تحديث ${updated} | تجاهل ${skipped}`; }
-async function importInvoicesSmart(){ const f=invFile.files[0]; if(!f){alert('اختر ملف');return;} const rows=await fileToRows(f); let added=0, skipped=0; rows.forEach(r=>{ const op=String(smartVal(r,['نوع العملية','العملية','type'])||'').trim(); const key=smartVal(r,['الكود الداخلي','الباركود','اسم الصنف','اسم المنتج']); const qty=+smartVal(r,['الكمية','qty'])||0; const price=+smartVal(r,['السعر','price'])||0; const branch=smartVal(r,['الموقع','branch'])||'المخزن'; const date=smartVal(r,['التاريخ','date'])||new Date().toISOString().slice(0,10); const it=findItem(key); if(!it || !op || !qty){ skipped++; return; } if(String(op).includes('شراء')){ db.purchases.push({code:it.code,name:it.name,qty,price,branch,date,supplier:''}); db.movements.push({type:'شراء',code:it.code,name:it.name,qty,from:'',to:branch,date,price}); } else { db.sales.push({code:it.code,name:it.name,qty,price,branch,date,customer:''}); db.movements.push({type:'بيع',code:it.code,name:it.name,qty,from:branch,to:'',date,price}); } added++; }); saveDB(); renderAll(); invImportMsg.textContent=`تمت معالجة ${added} صف | تجاهل ${skipped}`; }
-function exportExcel(){ const wb=XLSX.utils.book_new(); const itemsRows=db.items.map(i=>({...i, stock: totalStock(i.code), consumption14: consumptionLast14(i.code)})); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(itemsRows), 'المواد'); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(db.sales), 'المبيعات'); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(db.purchases), 'المشتريات'); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(db.movements), 'الحركات'); XLSX.writeFile(wb, 'AAT_Smart_Export.xlsx'); }
-function downloadItemsTemplate(){ const rows=[{'اسم الصنف':'مصباح LED 40 واط','الكود الداخلي':'ELE-LMP-001','الباركود':'123456789','القسم الرئيسي':'كهربائيات','المجموعة':'مصابيح','الوحدة':'قطعة','سعر الكلفة':3500,'سعر البيع':5000,'الحد الأدنى':5,'حد إعادة الطلب':10,'حد أدنى للصرف لكل 15 يوم':8,'الموقع':'المخزن'}]; const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), 'المواد'); XLSX.writeFile(wb,'نموذج_المواد.xlsx'); }
-function downloadInvoicesTemplate(){ const rows=[{'نوع العملية':'شراء','التاريخ':'2026-04-18','الكود الداخلي':'ELE-LMP-001','الكمية':10,'السعر':3500,'الموقع':'المخزن'},{'نوع العملية':'بيع','التاريخ':'2026-04-18','الكود الداخلي':'ELE-LMP-001','الكمية':2,'السعر':5000,'الموقع':'فرع عمار العاني'}]; const wb=XLSX.utils.book_new(); XLSX.utils.book_append_sheet(wb, XLSX.utils.json_to_sheet(rows), 'الفواتير'); XLSX.writeFile(wb,'نموذج_الفواتير.xlsx'); }
-if('serviceWorker' in navigator){ window.addEventListener('load',()=>navigator.serviceWorker.register('sw.js').catch(()=>{})); }
-</script>
+  <script src="app.js"></script>
 </body>
 </html>

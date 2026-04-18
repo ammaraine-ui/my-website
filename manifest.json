@@ -1,1 +1,10 @@
-{"name":"AAT Smart ERP","short_name":"AAT ERP","start_url":"./index.html","display":"standalone","background_color":"#0b1220","theme_color":"#0f172a","lang":"ar"}
+{
+  "name": "AAT ERP v9 PRO",
+  "short_name": "AAT ERP",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#f5f7fb",
+  "theme_color": "#2563eb",
+  "lang": "ar",
+  "dir": "rtl"
+}
