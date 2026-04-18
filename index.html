@@ -3,86 +3,180 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AAT ERP v9 PRO</title>
-  <link rel="manifest" href="manifest.json" />
-  <link rel="stylesheet" href="styles.css" />
+  <title>نظام عمار العاني ويب</title>
+  <link rel="stylesheet" href="/styles.css" />
 </head>
 <body>
   <div id="app">
-    <div id="loginScreen" class="login-shell">
-      <div class="login-card">
-        <div class="brand-row">
-          <div class="brand-badge">AAT</div>
-          <div>
-            <h1>نظام شركة عمار العاني</h1>
-            <p>v9 PRO — نسخة احترافية مفتوحة</p>
-          </div>
-        </div>
-        <div class="login-grid">
-          <label>اسم المستخدم</label>
-          <input id="loginUsername" type="text" placeholder="admin" />
-          <label>الرقم السري</label>
-          <input id="loginPassword" type="password" placeholder="123456" />
-        </div>
-        <button class="primary-btn full" id="loginBtn">دخول</button>
-        <div class="hint-box">
-          <strong>الحساب الافتراضي:</strong> admin / 123456
-        </div>
+    <section id="loginScreen" class="screen active">
+      <div class="card login-card">
+        <h1>نظام عمار العاني</h1>
+        <p>نسخة ويب احترافية للشبكة والمبيعات</p>
+        <input id="username" placeholder="اسم المستخدم" value="admin" />
+        <input id="password" placeholder="كلمة المرور" type="password" value="123456" />
+        <button id="loginBtn">دخول</button>
+        <button id="initBtn" class="secondary">تهيئة قاعدة البيانات</button>
+        <div id="loginMsg" class="msg"></div>
       </div>
-    </div>
+    </section>
 
-    <div id="mainApp" class="hidden">
-      <aside class="sidebar">
-        <div class="sidebar-top">
-          <div class="brand-badge">AAT</div>
-          <div>
-            <h2>عمار العاني</h2>
-            <small id="currentUserLabel"></small>
-          </div>
+    <section id="mainScreen" class="screen">
+      <header class="topbar">
+        <div>
+          <strong>نظام عمار العاني</strong>
+          <span id="welcomeUser"></span>
         </div>
-
-        <div class="search-box">
-          <input id="globalSearch" type="text" placeholder="ابحث عن صنف، فاتورة، عميل، مورد..." />
-          <div id="globalSuggestions" class="suggestions hidden"></div>
+        <div class="topbar-actions">
+          <span id="clockBox"></span>
+          <button id="logoutBtn" class="secondary">تسجيل خروج</button>
         </div>
+      </header>
 
-        <nav id="sidebarNav" class="menu"></nav>
+      <main class="layout">
+        <aside class="sidebar">
+          <button class="nav-btn active" data-tab="dashboard">الرئيسية</button>
+          <button class="nav-btn" data-tab="customers">العملاء</button>
+          <button class="nav-btn" data-tab="suppliers">الموردون</button>
+          <button class="nav-btn" data-tab="items">المواد</button>
+          <button class="nav-btn" data-tab="sales">نقطة البيع</button>
+          <button class="nav-btn" data-tab="users">المستخدمون</button>
+          <button class="nav-btn" data-tab="roles">الصلاحيات</button>
+          <button class="nav-btn" data-tab="reports">التقارير</button>
+        </aside>
 
-        <div class="sidebar-bottom">
-          <button class="ghost-btn full" id="logoutBtn">تسجيل خروج</button>
-        </div>
-      </aside>
-
-      <main class="content">
-        <header class="topbar">
-          <div>
-            <h1 id="pageTitle">لوحة التحكم</h1>
-            <p id="pageSubtitle">نظرة تنفيذية سريعة على الشركة</p>
+        <section class="content">
+          <div id="dashboard" class="tab active">
+            <div class="stats-grid six">
+              <div class="stat-box"><span>العملاء</span><strong id="statCustomers">0</strong></div>
+              <div class="stat-box"><span>الموردون</span><strong id="statSuppliers">0</strong></div>
+              <div class="stat-box"><span>المواد</span><strong id="statItems">0</strong></div>
+              <div class="stat-box"><span>الفواتير</span><strong id="statInvoices">0</strong></div>
+              <div class="stat-box"><span>إجمالي المبيعات</span><strong id="statSales">0</strong></div>
+              <div class="stat-box"><span>المستخدمون</span><strong id="statUsers">0</strong></div>
+            </div>
           </div>
-          <div class="topbar-actions">
-            <button class="outline-btn" id="backupBtn">نسخة احتياطية</button>
-            <button class="outline-btn" id="restoreBtn">استيراد نسخة</button>
-            <input type="file" id="restoreFile" class="hidden" accept="application/json" />
-          </div>
-        </header>
 
-        <section id="dashboardSection" class="page-section"></section>
-        <section id="salesSection" class="page-section hidden"></section>
-        <section id="purchasesSection" class="page-section hidden"></section>
-        <section id="itemsSection" class="page-section hidden"></section>
-        <section id="inventorySection" class="page-section hidden"></section>
-        <section id="customersSection" class="page-section hidden"></section>
-        <section id="suppliersSection" class="page-section hidden"></section>
-        <section id="debtsSection" class="page-section hidden"></section>
-        <section id="transfersSection" class="page-section hidden"></section>
-        <section id="reportsSection" class="page-section hidden"></section>
-        <section id="suggestionsSection" class="page-section hidden"></section>
-        <section id="settingsSection" class="page-section hidden"></section>
-        <section id="usersSection" class="page-section hidden"></section>
+          <div id="customers" class="tab">
+            <h2>العملاء</h2>
+            <div class="form-grid">
+              <input id="customerName" placeholder="اسم العميل" />
+              <input id="customerPhone" placeholder="رقم الهاتف" />
+              <input id="customerAddress" placeholder="العنوان" />
+              <input id="customerBalance" placeholder="الرصيد" type="number" />
+              <button id="addCustomerBtn">إضافة عميل</button>
+            </div>
+            <table><thead><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>الرصيد</th></tr></thead><tbody id="customersBody"></tbody></table>
+          </div>
+
+          <div id="suppliers" class="tab">
+            <h2>الموردون</h2>
+            <div class="form-grid">
+              <input id="supplierName" placeholder="اسم المورد" />
+              <input id="supplierPhone" placeholder="رقم الهاتف" />
+              <input id="supplierAddress" placeholder="العنوان" />
+              <input id="supplierBalance" placeholder="الرصيد" type="number" />
+              <button id="addSupplierBtn">إضافة مورد</button>
+            </div>
+            <table><thead><tr><th>#</th><th>الاسم</th><th>الهاتف</th><th>الرصيد</th></tr></thead><tbody id="suppliersBody"></tbody></table>
+          </div>
+
+          <div id="items" class="tab">
+            <h2>المواد</h2>
+            <div class="form-grid two-buttons">
+              <input id="itemCode" placeholder="الكود / الباركود" />
+              <input id="itemName" placeholder="اسم المادة" />
+              <input id="itemUnit" placeholder="الوحدة" value="قطعة" />
+              <input id="itemPrice" placeholder="السعر" type="number" />
+              <input id="itemQty" placeholder="الكمية" type="number" />
+              <button id="addItemBtn">إضافة مادة</button>
+              <button id="refreshItemsBtn" class="secondary">تحديث القائمة</button>
+            </div>
+            <table><thead><tr><th>#</th><th>الكود</th><th>المادة</th><th>السعر</th><th>الكمية</th></tr></thead><tbody id="itemsBody"></tbody></table>
+          </div>
+
+          <div id="sales" class="tab">
+            <h2>نقطة البيع POS</h2>
+            <div class="pos-layout">
+              <div class="card pos-box">
+                <div class="form-grid compact-grid">
+                  <input id="saleCustomer" placeholder="اسم العميل" value="نقدي" />
+                  <input id="saleBarcode" placeholder="باركود أو كود المادة" />
+                  <input id="saleItemName" placeholder="اسم المادة" />
+                  <input id="saleQty" placeholder="الكمية" type="number" value="1" />
+                  <input id="salePrice" placeholder="السعر" type="number" />
+                  <input id="saleNotes" placeholder="ملاحظات" />
+                  <button id="findItemBtn" class="secondary">بحث مادة</button>
+                  <button id="addSaleLineBtn">إضافة للسلة</button>
+                </div>
+                <table>
+                  <thead><tr><th>المادة</th><th>الكمية</th><th>السعر</th><th>الإجمالي</th><th>حذف</th></tr></thead>
+                  <tbody id="saleCartBody"></tbody>
+                </table>
+                <div class="actions-row sticky-actions">
+                  <strong>الإجمالي: <span id="cartTotal">0</span></strong>
+                  <div class="btn-group">
+                    <button id="clearCartBtn" class="secondary">تفريغ السلة</button>
+                    <button id="saveInvoiceBtn">حفظ الفاتورة</button>
+                  </div>
+                </div>
+              </div>
+              <div class="card side-panel">
+                <h3>مواد سريعة</h3>
+                <div id="quickItems" class="quick-grid"></div>
+              </div>
+            </div>
+            <table><thead><tr><th>#</th><th>العميل</th><th>الإجمالي</th><th>التاريخ</th></tr></thead><tbody id="salesBody"></tbody></table>
+          </div>
+
+          <div id="users" class="tab">
+            <h2>المستخدمون</h2>
+            <div class="form-grid">
+              <input id="userUsername" placeholder="اسم المستخدم" />
+              <input id="userPassword" placeholder="كلمة المرور" />
+              <input id="userFullName" placeholder="الاسم الكامل" />
+              <select id="userRole"><option>Admin</option><option>كاشير</option><option>محاسب</option><option>امين مخزن</option></select>
+              <button id="addUserBtn">إضافة مستخدم</button>
+            </div>
+            <table><thead><tr><th>#</th><th>المستخدم</th><th>الاسم</th><th>الدور</th><th>الحالة</th></tr></thead><tbody id="usersBody"></tbody></table>
+          </div>
+
+          <div id="roles" class="tab">
+            <h2>الأدوار والصلاحيات</h2>
+            <div class="form-grid">
+              <input id="roleName" placeholder="اسم الدور" />
+              <input id="roleDescription" placeholder="وصف الدور" />
+              <button id="saveRoleBtn">حفظ الدور المحدد</button>
+            </div>
+            <div class="permissions-box">
+              <label><input type="checkbox" class="perm-check" value="dashboard:view"> مشاهدة الرئيسية</label>
+              <label><input type="checkbox" class="perm-check" value="customers:view"> عرض العملاء</label>
+              <label><input type="checkbox" class="perm-check" value="customers:create"> إضافة عملاء</label>
+              <label><input type="checkbox" class="perm-check" value="suppliers:view"> عرض الموردين</label>
+              <label><input type="checkbox" class="perm-check" value="suppliers:create"> إضافة موردين</label>
+              <label><input type="checkbox" class="perm-check" value="items:view"> عرض المواد</label>
+              <label><input type="checkbox" class="perm-check" value="items:create"> إضافة مواد</label>
+              <label><input type="checkbox" class="perm-check" value="sales:view"> عرض المبيعات</label>
+              <label><input type="checkbox" class="perm-check" value="sales:create"> إنشاء فاتورة</label>
+              <label><input type="checkbox" class="perm-check" value="reports:view"> عرض التقارير</label>
+              <label><input type="checkbox" class="perm-check" value="users:view"> عرض المستخدمين</label>
+              <label><input type="checkbox" class="perm-check" value="users:create"> إضافة مستخدمين</label>
+            </div>
+            <div id="rolesMsg" class="msg"></div>
+          </div>
+
+          <div id="reports" class="tab">
+            <h2>التقارير</h2>
+            <div class="reports-grid">
+              <div class="card panel"><h3>أفضل المواد مبيعًا</h3><table><thead><tr><th>المادة</th><th>الكمية</th><th>الإجمالي</th></tr></thead><tbody id="topItemsBody"></tbody></table></div>
+              <div class="card panel"><h3>آخر الفواتير</h3><table><thead><tr><th>#</th><th>العميل</th><th>الإجمالي</th></tr></thead><tbody id="recentInvoicesBody"></tbody></table></div>
+              <div class="card panel"><h3>مواد منخفضة المخزون</h3><table><thead><tr><th>المادة</th><th>الكمية</th><th>السعر</th></tr></thead><tbody id="lowStockBody"></tbody></table></div>
+              <div class="card panel"><h3>مبيعات آخر الأيام</h3><table><thead><tr><th>اليوم</th><th>الإجمالي</th></tr></thead><tbody id="dailySalesBody"></tbody></table></div>
+            </div>
+          </div>
+        </section>
       </main>
-    </div>
+    </section>
   </div>
-
-  <script src="app.js"></script>
+  <script src="/app.js"></script>
 </body>
 </html>
