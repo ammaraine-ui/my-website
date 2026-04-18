@@ -1,0 +1,51 @@
+<Window x:Class="AmmarAlani.Views.MainDashboard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="الرئيسية - نظام عمار العاني"
+        Height="760" Width="1280"
+        FlowDirection="RightToLeft"
+        WindowStartupLocation="CenterScreen">
+    <DockPanel Background="#F7F9FC">
+        <Border DockPanel.Dock="Top" Background="White" Padding="16" BorderBrush="#E4E8F0" BorderThickness="0,0,0,1">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="2*"/>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <TextBlock Text="نظام عمار العاني للإدارة والمبيعات" FontSize="24" FontWeight="Bold"/>
+                <TextBlock Grid.Column="1" Text="المستخدم: Admin" HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                <TextBlock Grid.Column="2" Text="الفرع الرئيسي - 10:00 AM" HorizontalAlignment="Left" VerticalAlignment="Center"/>
+            </Grid>
+        </Border>
+
+        <ScrollViewer>
+            <StackPanel Margin="20">
+                <UniformGrid Columns="4" Rows="3" Margin="0,0,0,20">
+                    <Button Content="المبيعات" Margin="8" Height="110"/>
+                    <Button Content="المشتريات" Margin="8" Height="110"/>
+                    <Button Content="المواد" Margin="8" Height="110"/>
+                    <Button Content="المخازن" Margin="8" Height="110"/>
+                    <Button Content="الحسابات" Margin="8" Height="110"/>
+                    <Button Content="العملاء" Margin="8" Height="110"/>
+                    <Button Content="الموردين" Margin="8" Height="110"/>
+                    <Button Content="المستخدمين" Margin="8" Height="110"/>
+                    <Button Content="الموظفين" Margin="8" Height="110"/>
+                    <Button Content="التقارير" Margin="8" Height="110"/>
+                    <Button Content="الإعدادات" Margin="8" Height="110"/>
+                    <Button Content="الصلاحيات" Margin="8" Height="110"/>
+                </UniformGrid>
+
+                <GroupBox Header="ملخص اليوم" Padding="14">
+                    <UniformGrid Columns="5">
+                        <StackPanel Margin="8"><TextBlock Text="المبيعات" FontWeight="Bold"/><TextBlock Text="0.00" FontSize="22"/></StackPanel>
+                        <StackPanel Margin="8"><TextBlock Text="المشتريات" FontWeight="Bold"/><TextBlock Text="0.00" FontSize="22"/></StackPanel>
+                        <StackPanel Margin="8"><TextBlock Text="القبض" FontWeight="Bold"/><TextBlock Text="0.00" FontSize="22"/></StackPanel>
+                        <StackPanel Margin="8"><TextBlock Text="الصرف" FontWeight="Bold"/><TextBlock Text="0.00" FontSize="22"/></StackPanel>
+                        <StackPanel Margin="8"><TextBlock Text="مواد ناقصة" FontWeight="Bold"/><TextBlock Text="0" FontSize="22"/></StackPanel>
+                    </UniformGrid>
+                </GroupBox>
+            </StackPanel>
+        </ScrollViewer>
+    </DockPanel>
+</Window>
